@@ -1,11 +1,14 @@
 <?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // DEFINICION DE LA CLASE PRODUCTO
 class Producto{
     // DEFINICION DE ATRIBUTOS
     public $precio;
     public $nombre;
-    public $disponible;
-    
+    private $disponible;
+
     // Método constructor
     public function __construct(int $precio = 0 ,string $nombre = 'SIN NOMBRE', bool $disponible = false)
     {
@@ -16,23 +19,39 @@ class Producto{
 
     // DEFINICION DE METODOS
 
-    public function mostrarNombreProducto() : void{
+    private function mostrarNombreProducto() : void{
         echo $this->nombre;
     }
 
     public function mostrarPrecioProducto() : void{
         echo $this->precio;
     }
+
+    public function mostrarInformacionProducto() : void{
+        $this->mostrarNombreProducto();
+        echo $this->precio;
+    }
+
+    // METODOS GETTER
+    public function getDisponibilidad() : string {
+        return $this->disponible ? 'SI ESTA DISPONIBLE' : 'NO ESTA DISPONIBLE';
+    }
+    // METODOS SETTER
+    public function setDisponibilidad(bool $disponible) : void {
+        $this->disponible = $disponible;
+    }
     
 }
 
 // CREACIÓN DE UN OBJETO
 // CREAR UNA INSTANCIA
-$mesa = new Producto('500', 'MESA', 1); 
+$mesa = new Producto(); 
 
-// $mesa->nombre = "Mesa";
-// $mesa->precio = 500;
-// $mesa->disponible = true;
+$mesa->nombre = "Mesa";
+$mesa->precio = 500;
+// $mesa->disponible = true; 
+// $mesa->setDisponibilidad(false);
+// echo $mesa->getDisponibilidad();
 
 // $silla = new Producto(); 
 
@@ -50,6 +69,7 @@ echo "</pre>";
 // echo "</pre>";
 
 // $mesa->mostrarNombreProducto();
+$mesa->mostrarInformacionProducto();
 // $silla->mostrarNombreProducto();
 // $mesa->mostrarPrecioProducto();
 
